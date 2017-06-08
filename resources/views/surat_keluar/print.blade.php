@@ -20,9 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-hr { 
+hr {
     display: block;
     margin-top: 0.5em;
     margin-bottom: 0em;
@@ -30,7 +30,7 @@ hr {
     margin-right: auto;
     border-style: inset;
     border-width: 3px;
-} 
+}
 </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,18 +55,18 @@ hr {
 
     <section class="invoice">
       <div class="container">
-      
+
         <div class="row">
-            
+
           <div class="col-xs-3">
-            <img src="{{URL('images/unnes2015_black.jpg')}}" height="180" width="220" style="padding-left: 60px;padding-bottom: 60px;">
+            <img src="{{URL('images/unnes2015_black.jpg')}}" height="140" width="200" style="padding-left: 50px;">
           </div>
           <!-- end col lg 2 -->
 
           <div class="col-xs-8">
-            
+
             <div class="text-center">
-              
+
               <p> KEMENTERIAN RISET, TEKNOLOGI DAN PENDIDIKAN TINGGI UNIVERSITAS NEGERI SEMARANG <br>
                <b> FAKULTAS TEKNIK </b> <br>
               Gedung E1 Kampus Sekaran Gunungpati Semarang 50229<br>
@@ -86,26 +86,30 @@ hr {
         <!-- end row -->
 
         <div class="row">
-          
+
           <div class="col-xs-offset-1 col-xs-10">
-      
+
             <p> Nomor   :    {{$surat->no_surat}}      /UN37.1.5/DT/2017 </p>
             <p> <b> Hal           : Permohonan Izin Observasi </b></p> <br>
-            <p> Yth : {{$surat->kepada}} </p> 
-            <div class="col-xs-8"> 
+            <p> Yth : {{$surat->kepada}} </p>
+            <div class="col-xs-8">
             <p>{{$surat->dari}}</p>
             </div>
 
 
           </div>
-         
+
         </div>
         <!-- end row -->
         <div class="row">
         <br>
          <div class="col-xs-offset-1 col-xs-10">
-         
-           {{$surat->isi}}
+
+           {{-- {{$surat->isi}} --}}
+           <input type="hidden" id="content" value="{{$surat->isi}}">
+           <div id="isi">
+
+           </div>
 
            </div>
 
@@ -116,11 +120,13 @@ hr {
                       <p>Wakil Dekan Bidang Akademik </p>
                     </div>
                   </div>
+
                   <br>
                   <br>
                   <br>
+
                   <div class="row">
-                    <div class="col-xs-7">
+                    <div class="col-xs-offset-1 col-xs-6">
                       <p>Tembusan :</p>
                       <p>Ketua Jurusan TE Fakultas Teknik </p>
                       <p>Universitas Negeri Semarang</p>
@@ -135,27 +141,27 @@ hr {
                   <div class="row">
                   <div class="col-xs-offset-9 col-xs-10">
                     <!-- <p data-date-format="dd-mm-yyyy">{{$surat->updated_at}}</p> -->
-                    
+
                     <br>
                     <br>
                     <br>
                   </div>
                   <div class="row">
                     <div class="col-xs-offset-9 col-xs-10">
-                      
+
                     </div>
                     <div class="col-xs-5">
-                      
+
                     </div>
                   </div>
-                  
+
                   </div>
 
         </div>
         <!-- end row -->
-      
 
-      </div> 
+
+      </div>
       <!-- end container fluid -->
 
       <!-- this row will not appear when printing -->
@@ -171,11 +177,13 @@ hr {
       </div>
 
     </section>
-    
+
 @endsection
 @section('script')
 <!-- ./wrapper -->
 <script type="text/javascript">
-  
+  $(document).ready(function(){
+    $("#isi").html($("#content").val());
+  });
 </script>
 @endsection
