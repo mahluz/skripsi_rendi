@@ -29,6 +29,9 @@ class SuratkeluarController extends Controller
         }
         public function index()
     {
+      if (Auth::user()->id_role!=1) {
+            return redirect('404');
+        }
 
 
         $active = array(
@@ -107,6 +110,8 @@ class SuratkeluarController extends Controller
             ->select("*")
             ->where('a.id_role',2)
             ->get();
+       
+
 
         return view('surat_keluar.create',['active' => $active, 'sub_judul' => 'Tambah surat Keluar']);
     }
@@ -136,7 +141,7 @@ class SuratkeluarController extends Controller
             'disposisi'=> $request->disposisi,
 
             ]);
-        return redirect('surat_keluar')->with('berhasil', $Surat_keluar?"berhasil":"gagal");
+        return redirect('suratsaya')->with('berhasil', $Surat_keluar?"berhasil":"gagal");
     }
 
     /**
@@ -153,11 +158,17 @@ class SuratkeluarController extends Controller
             );
 
         $surat_keluar = Surat_keluar::find($id);
+         $no_surat = DB::table('surat_keluar')
+            ->join('users','surat_keluar.id_user','=','users.id_user')
+            ->join('prodi','users.prodi','=','prodi.prodi')
+            ->where ('id_keluar',$id)
+            ->first();
 
         return view('surat_keluar.show',[
             'active' => $active,
             'surat_keluar' => $surat_keluar,
-            'sub_judul' => 'Detail surat_keluar'
+            'sub_judul' => 'Detail surat_keluar',
+            'surat'=> $no_surat
             ]);
     }
 
@@ -295,6 +306,30 @@ class SuratkeluarController extends Controller
 
         return view('surat_keluar.penelitian',['active' => $active, 'sub_judul' => 'Tambah surat Keluar','data'=>$data]);
     }
+
+     public function editpenelitian($id,$q)
+    {
+      // dd($id,$q);
+        $active = array(
+            'surat_keluar' => 'active',
+            );
+        $kategori_surat= Surat_keluar::where('id_keluar',$id)->first();
+
+        $surat_keluar = DB::table('surat_keluar as a')
+            ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
+            ->select("*")
+             ->where('a.id_user',$q)
+            ->get();
+          
+        return view('surat_keluar.editpenelitian',[
+            'active' => $active,
+            'surat_keluar' => $surat_keluar,
+            'sub_judul' => 'Edit surat Keluar',
+            'kategori_surat' => $kategori_surat
+            ]);
+
+
+      }
     public function cetak($id)
     {
 

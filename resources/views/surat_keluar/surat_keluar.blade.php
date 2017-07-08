@@ -105,9 +105,22 @@
                               @if ($sk->disposisi=='5')
                               <a title="Print" class="btn btn-xs btn-default" href="{{ url('cetak/'.$sk->id_keluar) }}"><i class="fa fa-print"></i></a>
                               @endif
+                             
                                <a title="Detail" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar) }}"><i class="fa fa-search"></i></a>
-                              <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar.'/edit') }}"><i class="fa fa-edit"></i></a>
+                                @if((Auth::user()->id_role == 1)||(Auth::user()->id_role == 3))
+
+                                @if ($sk->kategori == 'Surat Penelitian' )
+                                <?php $jenis_surat = "editpenelitian/".$sk->id_keluar."/".$sk->id_user; ?>
+                                @else($sk->kategori == 'Surat Observasi' )
+                                <?php $jenis_surat = "editobservasi/".$sk->id_keluar."/edit"; ?>
+                                @endif
+
+
+                              <a title="Edit" class="btn btn-xs btn-default" href=" <?php echo $jenis_surat; ?>"><i class="fa fa-edit"></i></a>
+                              @endif
+                              @if(Auth::user()->id_role == 1)
                               <a title="Delete" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus surat keluar {{ $sk->no_surat }}')){ $('#formdelete{{ $sk->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
+                              @endif
                             </td>
                           </tr>
                         @endforeach
@@ -182,8 +195,10 @@
                               <a title="Print" class="btn btn-xs btn-default" href="{{ url('cetak/'.$sk->id_keluar) }}"><i class="fa fa-print"></i></a>
                               @endif
                                <a title="Detail" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar) }}"><i class="fa fa-search"></i></a>
+                               @if((Auth::user()->id_role == 1)||(Auth::user()->id_role == 3))
                               <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar.'/edit') }}"><i class="fa fa-edit"></i></a>
                               <a title="Delete" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus surat keluar {{ $sk->no_surat }}')){ $('#formdelete{{ $sk->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
+                              @endif
                             </td>
                           </tr>
                         @endforeach

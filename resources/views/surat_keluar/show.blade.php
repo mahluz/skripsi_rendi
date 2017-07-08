@@ -13,6 +13,17 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
+    <style>
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 3px;
+}
+</style>
 @endsection
 
 @section('name')
@@ -30,94 +41,118 @@
 
 <!-- Main content -->
             <section class="content">
-              <div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Detail Surat Keluar</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                        <table class="table">
-                        <tr>
-                          <th style="width:30%">Action</th>
-                          <td>
-                            {!! Form::open([
-                                'method' => 'delete',
-                                'route' => ['surat_keluar.destroy',$surat_keluar->id_keluar],
-                                'id' => 'formdelete'.$surat_keluar->id_keluar
-                            ]) !!}
-                            {!!Form::close()!!}
-                            <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$surat_keluar->id_keluar.'/edit') }}"><i class="fa fa-edit"></i></a>
-                            <a title="Delete" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus surat Keluar {{ $surat_keluar->surat_keluar }}?')){ $('#formdelete{{ $surat_keluar->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
+              <div class="container">
 
-                          <th>Surat Keluar</th>
-                          <td>{{ $surat_keluar->no_surat }}</td>
-    
-                          </tr>
-                          <tr>
-                          <th>Hal </th>
-                          <td>{{ $surat_keluar->hal }}</td>
-                          </tr>
-                          <tr>
-                          <th> Dari</th>
-                          <td>{{ $surat_keluar->dari }}</td>
-                          </tr>
-                          <tr>
-                          <th> Kepada</th>
-                          <td>{{ $surat_keluar->kepada }}</td>
-                          </tr>
-                          <tr>
-                          <th> Isi</th>
-                          <td>{{ $surat_keluar->isi }}</td>
-                          </tr>
-                          <tr>
-                          <th> Tembusan </th>
-                          <td>{{ $surat_keluar->tembusan }}</td>
-                          </tr>
-                          <tr>
-                          <th> Disposisi </th>
-                          @if($surat_keluar->disposisi=='0')
-                                <?php $warna='belum validasi'; ?>
-                                @elseif($surat_keluar->disposisi=='1')
-                                <?php $warna='Kaprodi'; ?>
-                                @elseif($surat_keluar->disposisi=='2')
-                                <?php $warna='Kajur'; ?>
-                                @elseif($surat_keluar->disposisi=='3')
-                                <?php $warna='Sekjur'; ?>
-                                @elseif($surat_keluar->disposisi=='4')
-                                <?php $warna='Kalab'; ?>
-                               
-                                @endif
-                          <td>{{$warna}}</td>
-                          </tr>
+        <div class="row">
+
+          <div class="col-xs-3">
+            <img src="{{URL('images/unnes2015_black.jpg')}}" height="140" width="200" style="padding-left: 50px;">
+          </div>
+          <!-- end col lg 2 -->
+
+          <div class="col-xs-8">
+
+            <div class="text-center">
+
+              <p> KEMENTERIAN RISET, TEKNOLOGI DAN PENDIDIKAN TINGGI UNIVERSITAS NEGERI SEMARANG <br>
+               <b> FAKULTAS TEKNIK </b> <br>
+              Gedung E1 Kampus Sekaran Gunungpati Semarang 50229<br>
+              Telepon/Fax (024) 8508101 – 8508009 <br>
+              Laman : http://www.ft.unnes.ac.id, surel: ft_unnes@yahoo.com</p>
+            </div>
+            <!-- end text center -->
+          </div>
+          <!-- end col lg 10 -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+              <div class="col-xs-offset-1 col-xs-10">
+              <hr>
+              </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+
+          <div class="col-xs-offset-1 col-xs-10">
+
+            <p> Nomor   :    {{$surat->no_surat}}      /UN37.1.5/DT/2017 </p>
+            <p> <b> Hal           : Permohonan Izin Observasi </b></p> <br>
+            <p> Yth : {{$surat->kepada}} </p>
+            <div class="col-xs-8">
+            <p>{{$surat->dari}}</p>
+            </div>
 
 
-                          <tr>
-                          <th> Tanggal</th>
-                          <td>{{ date_format(date_create($surat_keluar->created_at),"d-m-Y") }}</td>
-                          </tr>
-          
-                        <tr>
-                          <th style="width:30%">Action</th>
-                          <td>
-                            {!! Form::open([
-                                'method' => 'delete',
-                                'route' => ['surat_keluar.destroy',$surat_keluar->id_keluar],
-                                'id' => 'formdelete'.$surat_keluar->id_keluar
-                            ]) !!}
-                            {!!Form::close()!!}
-                            <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$surat_keluar->id_keluar.'/edit') }}"><i class="fa fa-edit"></i></a>
-                            <a title="Detail" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus kategori {{ $surat_keluar->surat_keluar }}?')){ $('#formdelete{{ $surat_keluar->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
-                          </td>
-                        </tr>
-                      </table>
-                      </div><!-- /.box-body -->
-                  </div><!-- /.box -->
-                </div><!-- /.col -->
-              </div><!-- /.row -->
+          </div>
+
+        </div>
+        <!-- end row -->
+        <div class="row">
+        <br>
+         <div class="col-xs-offset-1 col-xs-10">
+
+           {{-- {{$surat->isi}} --}}
+           <input type="hidden" id="content" value="{{$surat->isi}}">
+           <div id="isi">
+
+           </div>
+
+           </div>
+
+                  <div class="row">
+                    <div class="col-xs-offset-7 col-xs-5">
+                      <p> Semarang, {{ date_format(date_create($surat->updated_at),"d-m-Y") }} </p>
+                      <p>A.n Dekan </p>
+                      <p>Wakil Dekan Bidang Akademik </p>
+                    </div>
+                  </div>
+
+                  <br>
+                  <br>
+                  <br>
+
+                  <div class="row">
+                    <div class="col-xs-offset-1 col-xs-6">
+                      <p>Tembusan :</p>
+                      <p>Ketua Jurusan TE Fakultas Teknik </p>
+                      <p>Universitas Negeri Semarang</p>
+                      <p><b>FM -01-AKD-21C</b></p>
+                    </div>
+                    <div class="col-xs-5">
+                      <p> Dr. I Made Sudana M.Pd </p>
+                      <p>NIP. 195605081984031004</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col-xs-offset-9 col-xs-10">
+                    <!-- <p data-date-format="dd-mm-yyyy">{{$surat->updated_at}}</p> -->
+
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-offset-9 col-xs-10">
+
+                    </div>
+                    <div class="col-xs-5">
+
+                    </div>
+                  </div>
+
+                  </div>
+
+        </div>
+        <!-- end row -->
+
+
+      </div>
+      <!-- end container fluid -->
+
+
+
             </section><!-- /.content -->
 @endsection
                 
@@ -136,8 +171,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     <script type="text/javascript">
-      $(function () {
-        $(".select2").select2();
-      })
-    </script>
+  $(document).ready(function(){
+    $("#isi").html($("#content").val());
+  });
+</script>
 @endsection

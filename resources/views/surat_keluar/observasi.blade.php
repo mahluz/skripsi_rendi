@@ -13,6 +13,18 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script type="text/javascript">
+      tinymce.init({
+        selector: '#isi',
+        plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table contextmenu paste code'
+  ],
+  toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+      });
+    </script>
 @endsection
 
 @section('name')
@@ -78,7 +90,7 @@
                                   <strong>{{ $errors->first('isi') }}</strong>
                               </span>
                           @endif
-                         <textarea name="isi" required class="form-control" rows="5" placeholder="Isi surat... "> {{ old('isi') }}</textarea>
+                         <textarea id="isi" name="isi" required class="form-control" rows="5" placeholder="Isi surat... "> </textarea>
                         </div>
                         
                       </div><!-- /.box-body -->

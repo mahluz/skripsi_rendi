@@ -99,6 +99,7 @@ Route::resource('permohonan','SuratkeluarController@permohonan');
 Route::resource('cetakkrs','SuratkeluarController@cetakkrs');
 
 Route::resource('cetak','SuratkeluarController@cetak');
+Route::resource('editpenelitian/{id}/{q}','SuratkeluarController@editpenelitian');
 
 Route::resource('tembusan','SuratmasukController@tembusan');
 

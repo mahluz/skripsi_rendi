@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('style')
- <!-- Bootstrap 3.3.5 -->
+<!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('font-awesome-4.6.1/css/font-awesome.min.css')}}">
@@ -13,15 +13,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
-     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
+    <style>
 hr {
     display: block;
     margin-top: 0.5em;
@@ -32,29 +24,24 @@ hr {
     border-width: 3px;
 }
 </style>
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 @endsection
 
 @section('name')
   {{ Auth::user()->name }}
 @endsection
 
- @section('content')
-  <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Cetak
-        <small>Surat Keluar</small>
-      </h1>
-    </section>
 
-    <section class="invoice">
-      <div class="container">
+@section('content')
+   <section class="content-header">
+              <h1>
+                Surat Keluar
+                <small>{{ $sub_judul }}</small>
+              </h1>
+            </section>
+
+<!-- Main content -->
+            <section class="content">
+              <div class="container">
 
         <div class="row">
 
@@ -89,11 +76,11 @@ hr {
 
           <div class="col-xs-offset-1 col-xs-10">
 
-            <p> Nomor   :    {{$surat->no_surat}}      /UN37.1.5/DT/2017 </p>
-            <p> <b> Hal           : Permohonan Izin Observasi </b></p> <br>
-            <p> Yth : {{$surat->kepada}} </p>
+            <p> Nomor   :         /UN37.1.5/DT/2017 </p>
+            <p> <b> Hal           : Permohonan Izin Penelitian</b></p> <br>
+            <p> Yth : <input type="text" required name="kepada" class="form-control" id="kepada" placeholder="kepada" value="{{ old('kepada') }}"> </p>
             <div class="col-xs-8">
-            <p>{{$surat->dari}}</p>
+            <p>Fakultas Teknik</p>
             </div>
 
 
@@ -164,26 +151,26 @@ hr {
       </div>
       <!-- end container fluid -->
 
-      <!-- this row will not appear when printing -->
-      <div class="row no-print">
-        <div class="col-xs-12">
-          <a href="" onclick="window.print();" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
-          </button>
-        </div>
-      </div>
 
-    </section>
 
+            </section><!-- /.content -->
 @endsection
+                
 @section('script')
-<!-- ./wrapper -->
-<script type="text/javascript">
-
-
+@section('script')
+<!-- jQuery 2.1.4 -->
+    <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
+    <!-- FastClick -->
+    <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/app.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('dist/js/demo.js') }}"></script>
+    <script type="text/javascript">
   $(document).ready(function(){
     $("#isi").html($("#content").val());
   });

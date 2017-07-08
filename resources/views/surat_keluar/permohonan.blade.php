@@ -17,7 +17,7 @@
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script type="text/javascript">
       tinymce.init({
-        selector: '#surat_keluar'
+        selector: 'isi'
       });
     </script>
 @endsection
@@ -58,7 +58,15 @@
                         </div>                        
                         <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="6">
                            <input type="hidden" required name="disposisi" class="form-control" id="disposisi" value="0">
-                        
+                        <div class="form-group {{ $errors->has('hal') ? ' has-error' : '' }}">
+                          <label for="hal">Hal</label>
+                          @if ($errors->has('hal'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('hal') }}</strong>
+                              </span>
+                          @endif
+                          <input type="text" required name="hal" class="form-control" id="hal" placeholder="hal" value="{{ old('hal') }}">
+                        </div>
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
                           <label for="kepada">Kepada</label>
                           @if ($errors->has('kepada'))
@@ -84,15 +92,8 @@
                                   <strong>{{ $errors->first('isi') }}</strong>
                               </span>
                           @endif
-                         <textarea id="surat_keluar" name="isi" required class="form-control" rows="5" placeholder="Isi surat... "> {{ old('isi') }}</textarea>
+                         <textarea id="isi" name="isi" required class="form-control" rows="20" placeholder="Isi surat... "> {{ old('isi') }}</textarea>
                         </div>
-                        <div class="form-group">
-                          <label for="tembusan">Tembusan</label>
-                          
-                          <input type="text"  name="tembusan" class="form-control" id="tembusan" value="Ketua Jurusan">
-
-                        </div>
-                      
                       </div><!-- /.box-body -->
                       <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-save"></i></button>
