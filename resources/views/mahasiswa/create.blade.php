@@ -59,14 +59,16 @@
                           @endif
                           <input type="text" required name="no_id" class="form-control" id="no_id" placeholder="Nomor Pegawai" value="{{ old('no_id') }}">
                         </div>
-                        <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
-                          <label>prodi</label>
-                          @if ($errors->has('prodi'))
-                              <span class="help-block">
-                                  <strong>{{ $errors->first('prodi') }}</strong>
-                              </span>
-                          @endif
-                          <input type="text" required name="prodi" class="form-control" id="prodi" placeholder="Prodi" value="{{ old('prodi') }}">
+                        <div class="form-group">
+                          <label for="judul">Prodi</label>
+                          
+                          <select required name="prodi" class="form-control select2" data-placeholder="prodi" style="width: 100%;">
+                              <option value="1"> Teknik Elektro</option>
+                              <option value="2"> Pendidikan Teknik Elektro </option>
+                               <option value="3"> Pendidikan TIK </option>
+                               
+                           
+                          </select>
                         </div>
                         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                           <label>Email</label>

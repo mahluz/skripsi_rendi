@@ -13,11 +13,16 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
-
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script type="text/javascript">
       tinymce.init({
-        selector: 'isi'
+        selector: '#isi',
+        plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table contextmenu paste code'
+  ],
+  toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
       });
     </script>
 @endsection
@@ -52,21 +57,14 @@
                           <?php
                         $katma = DB::table('kategori')->get();
                         ?>
-                          <select required name="id_kategori" id="kategori" class="form-radio select2"  style="width: 100%;">
-                          <option value="6" selected>Surat Permohonan </option>
+                          <select name="" id="" class="form-radio select2"  style="width: 100%;" disabled>
+                          <option value="2" selected>Surat Permohonan</option>
                           </select>
-                        </div>                        
-                        <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="6">
+                           <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="6">
                            <input type="hidden" required name="disposisi" class="form-control" id="disposisi" value="0">
-                        <div class="form-group {{ $errors->has('hal') ? ' has-error' : '' }}">
-                          <label for="hal">Hal</label>
-                          @if ($errors->has('hal'))
-                              <span class="help-block">
-                                  <strong>{{ $errors->first('hal') }}</strong>
-                              </span>
-                          @endif
-                          <input type="text" required name="hal" class="form-control" id="hal" placeholder="hal" value="{{ old('hal') }}">
-                        </div>
+                        </div>                        
+                        
+                        
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
                           <label for="kepada">Kepada</label>
                           @if ($errors->has('kepada'))
@@ -92,8 +90,9 @@
                                   <strong>{{ $errors->first('isi') }}</strong>
                               </span>
                           @endif
-                         <textarea id="isi" name="isi" required class="form-control" rows="20" placeholder="Isi surat... "> {{ old('isi') }}</textarea>
+                         <textarea id="isi" name="isi" required class="form-control" rows="5" placeholder="Isi surat... "> </textarea>
                         </div>
+                        
                       </div><!-- /.box-body -->
                       <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-save"></i></button>
@@ -145,7 +144,28 @@
           });
       };
       $(function () {
-        $(".select2").select();
+        $(".select2").select2();
       })
     </script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

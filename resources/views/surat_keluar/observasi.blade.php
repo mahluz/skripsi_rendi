@@ -43,7 +43,7 @@
 <!-- Main content -->
             <section class="content">
               <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-6">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Tambah</h3>
@@ -58,13 +58,13 @@
                         $katma = DB::table('kategori')->get();
                         ?>
                           <select name="" id="" class="form-radio select2"  style="width: 100%;" disabled>
-                          <option value="2" selected>Surat Observasi</option>
+                          <option value="1" selected>Surat Observasi</option>
                           </select>
                            <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="2">
                            <input type="hidden" required name="disposisi" class="form-control" id="disposisi" value="0">
-                        </div>                        
-                        
-                        
+                        </div>
+
+
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
                           <label for="kepada">Kepada</label>
                           @if ($errors->has('kepada'))
@@ -83,27 +83,72 @@
                           @endif
                           <input type="text" name="dari" class="form-control" id="dari" placeholder="Alamat instansi" value="{{ old('dari') }}">
                         </div>
-                        <div class="form-group {{ $errors->has('isi') ? ' has-error' : '' }}">
-                          <label for="isi">Isi surat</label>
+                        <div class="form-group {{ $errors->has('nama') ? ' has-error' : '' }}">
+                          <label for="dari">Nama</label>
+                          @if ($errors->has('nama'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('nama') }}</strong>
+                              </span>
+                          @endif
+                          <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Mahasiswa" value="{{ $data->name }}">
+                        </div>
+                        <div class="form-group {{ $errors->has('no_id') ? ' has-error' : '' }}">
+                          <label for="dari">NIM</label>
+                          @if ($errors->has('no_id'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('') }}</strong>
+                              </span>
+                          @endif
+                          <input type="text" name="no_id" class="form-control" id="no_id" placeholder="NIM" value="{{ $data->no_id}}">
+                        </div>
+                        <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
+                          <label for="dari">Program Studi</label>
+                          @if ($errors->has('prodi'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('prodi') }}</strong>
+                              </span>
+                          @endif
+                          <input type="text" name="prodi" class="form-control" id="hal" placeholder="Nama Prodi" value="S1 {{$data->jenis_prodi}}">
+                        </div>
+                        <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
+                          <label for="dari">Topik</label>
                           @if ($errors->has('isi'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('isi') }}</strong>
                               </span>
                           @endif
-                         <textarea id="isi" name="isi" required class="form-control" rows="5" placeholder="Isi surat... "> </textarea>
+                          <input type="text" name="isi" class="form-control" id="prodi" placeholder="Topik Observasi" value="{{ old('isi') }}">
                         </div>
-                        
+
+
                       </div><!-- /.box-body -->
-                      <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-save"></i></button>
+                      <div class="row">
+                      {{-- <div class="box-footer"> --}}
+                      <div class="col-xs-6">
+                        <button type="submit" name="status" value="1" class="btn btn-primary btn-block">Kirim <i class="fa fa-save"></i></button>
                       </div>
-                    </form>
-                  </div><!-- /.box -->
+                      <div class="col-xs-6">
+                        <button type="submit" name="status" value="2" class="btn btn-primary btn-block">simpan<i class="fa fa-save"></i></button>
+                      </div>
+                        </form>
+                      </div>
+                      </div><!-- /.box -->
                 </div><!-- /.col -->
-              </div><!-- /.row -->
+                <div class="col-xs-6">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Contoh Surat</h3>
+
+
+                </div><!-- /.box-header -->
+                <img style="width: 600px; height: auto;" src="{{url('gambar/surat_observasi.PNG')}}"
+                </div>
+                </div>
+
+              </div> <!-- /.row -->
             </section><!-- /.content -->
 @endsection
-                
+
 @section('script')
 <!-- jQuery 2.1.4 -->
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
@@ -148,24 +193,3 @@
       })
     </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -70,7 +70,9 @@
                           <td>{{ $no++ }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->no_id }}</td>
+                          
                           <td>{{$user->prodi}}</td>
+                          
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->no_telp }}</td>
                             @if($user->status=='1')

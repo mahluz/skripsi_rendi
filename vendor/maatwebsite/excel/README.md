@@ -41,7 +41,7 @@ Excel::create('Laravel Excel', function($excel) {
 
 [![Help the project](http://www.pledgie.com/campaigns/30385.png?skin_name=chrome)](http://pledgie.com/campaigns/30385)
 
-#Installation
+# Installation
 
 Require this package in your `composer.json` and update composer. This will download the package and PHPExcel of PHPOffice.
 
@@ -52,13 +52,13 @@ Require this package in your `composer.json` and update composer. This will down
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 
 ```php
-'Maatwebsite\Excel\ExcelServiceProvider',
+Maatwebsite\Excel\ExcelServiceProvider::class,
 ```
 
 You can use the facade for shorter code. Add this to your aliases:
 
 ```php
-'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 ```
 
 The class is bound to the ioC as `excel`
@@ -92,3 +92,9 @@ More about contributing can be found at: [http://www.maatwebsite.nl/laravel-exce
 # License
 
 This package is licensed under LGPL. You are free to use it in personal and commercial projects. The code can be forked and modified, but the original copyright author should always be included!
+
+# FAQ
+
+1) Chunk importer only imports the first row
+
+Check that auto_detect_line_endings in your php.ini is set to true.

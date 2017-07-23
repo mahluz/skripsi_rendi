@@ -74,17 +74,16 @@ hr {
 
         <div class="row">
 
-          <div class="col-xs-offset-1 col-xs-10">
+           <div class="col-xs-offset-1 col-xs-10">
 
-            <p> Nomor   :    {{$surat->no_surat}}      /UN37.1.5/DT/2017 </p>
-            <p> <b> Hal           : Permohonan Izin Observasi </b></p> <br>
+            <p> Nomor   :    </p>
+            <p> <b> Hal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  Ijin Penelitian </b></p> <br>
             <p> Yth : {{$surat->kepada}} </p>
             <div class="col-xs-8">
             <p>{{$surat->dari}}</p>
             </div>
-
-
-          </div>
+           </div>
+        </div>
 
         </div>
         <!-- end row -->
@@ -92,59 +91,61 @@ hr {
         <br>
          <div class="col-xs-offset-1 col-xs-10">
 
-           {{-- {{$surat->isi}} --}}
-           <input type="hidden" id="content" value="{{$surat->isi}}">
-           <div id="isi">
+           <p>Dengan hormat,</p>
+<p>Bersama ini, kami mohon ijin pelaksanaan Penelitian untuk penyusunan Skripsi / Tugas Akhir oleh mahasiswa sebagai berikut :</p>
+<p>&nbsp;</p>
+<p>Nama &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; {{$surat->name}}</p>
+<p>Nim &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp;{{$surat->no_id}}</p>
+<p>Program Studi &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: SI&nbsp;{{$surat->jenis_prodi}}</p>
+<p>Topik &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : {{$surat->isi}}</p>
+<p>&nbsp;</p>
+<p>Atas perhatian dan kerjasamanya di ucapkan terima kasih.</p>
 
            </div>
 
-           </div>
+                 
 
                   <div class="row">
-                    <div class="col-xs-offset-7 col-xs-5">
-                      <p> Semarang, {{ date_format(date_create($surat->updated_at),"d-m-Y") }} </p>
-                      <p>A.n Dekan </p>
-                      <p>Wakil Dekan Bidang Akademik </p>
+                
+                    <div class="row">
+                      <div class="col-xs-offset-7 col-xs-5">
+                        <p> Semarang, {{ date_format(date_create($surat->updated_at),"d-m-Y") }} </p>
+                        <p> Dekan, </p>
+                      </div>
                     </div>
-                  </div>
-
-                  <br>
-                  <br>
-                  <br>
-
-                  <div class="row">
-                    <div class="col-xs-offset-1 col-xs-6">
-                      <p>Tembusan :</p>
-                      <p>Ketua Jurusan TE Fakultas Teknik </p>
-                      <p>Universitas Negeri Semarang</p>
-                      <p><b>FM -01-AKD-21C</b></p>
-                    </div>
-                    <div class="col-xs-5">
-                      <p> Dr. I Made Sudana M.Pd </p>
-                      <p>NIP. 195605081984031004</p>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                  <div class="col-xs-offset-9 col-xs-10">
-                    <!-- <p data-date-format="dd-mm-yyyy">{{$surat->updated_at}}</p> -->
 
                     <br>
                     <br>
                     <br>
-                  </div>
-                  <div class="row">
+
+                    <div class="row">
+                      <div class="col-xs-offset-7 col-xs-5">
+                        <p> Dr. Nur Qudus M.T </p>
+                        <p>NIP. 196911301994031001</p>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
                     <div class="col-xs-offset-9 col-xs-10">
+                      <!-- <p data-date-format="dd-mm-yyyy">{{$surat->updated_at}}</p> -->
+
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-offset-9 col-xs-10">
+
+                      </div>
+                      <div class="col-xs-5">
+
+                      </div>
+                    </div>
 
                     </div>
-                    <div class="col-xs-5">
 
-                    </div>
-                  </div>
-
-                  </div>
-
-        </div>
+          </div>
         <!-- end row -->
 
 

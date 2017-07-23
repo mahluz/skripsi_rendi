@@ -49,23 +49,12 @@
                   <h3 class="box-title">Tambah</h3>
                 </div><!-- /.box-header -->
                 @if($kategori_surat->id_kategori==1)
-                
-                
-
-                
 
 
-
-                  
                 @endif
-                {!!Form::model($surat_keluar,[
-                      'method'  => 'patch',
-                      'route'   => ['surat_keluar.update',$surat_keluar->id_keluar],
-                      'id'      => 'form-surat_keluar',
-                      'onsubmit'=> 'setFormSubmitting1()',
-                    ])!!}
+
                 <!-- form start -->
-                    <form id="form-surat_keluar" required role="form" method="post" action="{{ url('surat_keluar') }}" onsubmit="setFormSubmitting()" enctype="multipart/form-data">
+                    <form id="form-surat_keluar" required role="form" method="post" action="{{ url('update/'.$surat_keluar[0]->id_keluar) }}" onsubmit="setFormSubmitting()" enctype="multipart/form-data">
                       {!! csrf_field() !!}
                       <div class="box-body">
                         <div class="form-group">
@@ -78,9 +67,9 @@
                           </select>
                            <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="1">
                            <input type="hidden" required name="disposisi" class="form-control" id="disposisi" value="0">
-                        </div>                        
-                        
-                        
+                        </div>
+
+
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
                           <label for="kepada">Kepada</label>
                           @if ($errors->has('kepada'))
@@ -88,7 +77,7 @@
                                   <strong>{{ $errors->first('kepada') }}</strong>
                               </span>
                           @endif
-                          <input type="text" required name="kepada" class="form-control" id="kepada" placeholder="kepada" value="{{ $surat_keluar->kepada }}">
+                          <input type="text" required name="kepada" class="form-control" id="kepada" placeholder="kepada" value="{{$surat_keluar[0]->kepada}}">
                         </div>
                         <div class="form-group {{ $errors->has('dari') ? ' has-error' : '' }}">
                           <label for="dari">Alamat</label>
@@ -97,7 +86,7 @@
                                   <strong>{{ $errors->first('dari') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="dari" class="form-control" id="dari" placeholder="Alamat instansi" value="{{ $surat_keluar->dari }}">
+                          <input type="text" name="dari" class="form-control" id="dari" placeholder="Alamat instansi" value="{{$surat_keluar[0]->dari}}">
                         </div>
                         <div class="form-group {{ $errors->has('nama') ? ' has-error' : '' }}">
                           <label for="dari">Nama</label>
@@ -106,7 +95,7 @@
                                   <strong>{{ $errors->first('nama') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Mahasiswa" value=" {{ $surat_keluar->name }} ">
+                          <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Mahasiswa" value="{{ $surat_keluar[0]->name }}  ">
                         </div>
                         <div class="form-group {{ $errors->has('no_id') ? ' has-error' : '' }}">
                           <label for="dari">NIM</label>
@@ -115,7 +104,7 @@
                                   <strong>{{ $errors->first('') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="no_id" class="form-control" id="no_id" placeholder="NIM" value="{{ ucwords(Auth::user()->no_id) }} ">
+                          <input type="text" name="no_id" class="form-control" id="no_id" placeholder="NIM" value="{{ $surat_keluar[0]->no_id}}">
                         </div>
                         <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
                           <label for="dari">Program Studi</label>
@@ -124,7 +113,7 @@
                                   <strong>{{ $errors->first('prodi') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="prodi" class="form-control" id="prodi" placeholder="Nama Prodi" value="S1">
+                          <input type="text" name="prodi" class="form-control" id="prodi" placeholder="Nama Prodi" value="S1 {{$surat_keluar[0]->jenis_prodi}}">
                         </div>
                         <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
                           <label for="dari">Topik</label>
@@ -133,22 +122,23 @@
                                   <strong>{{ $errors->first('isi') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="isi" class="form-control" id="prodi" placeholder="Topik Penelitian" value="{{ $surat_keluar->isi }}">
+                          <input type="text" name="isi" class="form-control" id="prodi" placeholder="Topik Penelitian" value="{{$surat_keluar[0]->isi}}">
                         </div>
+                        @if(Auth::user()->id_role == 1)
                          <div class="form-group">
                           <label for="judul">Validasi</label>
-                          
+
                           <select required name="disposisi" class="form-control select2" data-placeholder="Pilih Disposisi" style="width: 100%;">
-                            
+
                               <option value="1"> Ketua Prodi</option>
                                <option value="2"> Ketua Jurusan</option>
                                 <option value="3"> Pembantu Dekan 1</option>
                                  <option value="4"> Dekan </option>
 
-                           
+
                           </select>
                         </div>
-                        
+                      @endif
                       </div><!-- /.box-body -->
                       <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-save"></i></button>
@@ -166,11 +156,11 @@
                 <img style="width: 600px; height: auto;" src="{{url('gambar/gambar_surat_penelitian.PNG')}}"
                 </div>
                 </div>
-                
+
               </div> <!-- /.row -->
             </section><!-- /.content -->
 @endsection
-                
+
 @section('script')
 <!-- jQuery 2.1.4 -->
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
@@ -215,24 +205,3 @@
       })
     </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

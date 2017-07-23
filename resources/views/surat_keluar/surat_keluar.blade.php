@@ -68,6 +68,7 @@
                       </thead>
                       <tbody>
                       <?php $no=1; ?>
+
                         @foreach($surat_keluar as $sk)
                           <tr>
                             <td>{{ $no++ }}</td>
@@ -90,6 +91,8 @@
                                   <?php $warna='Cetak'; ?>
                                   @elseif($sk->disposisi==NULL)
                                   <?php $warna='Masih kosong'; ?>
+                                @else
+                                  <?php $warna='draft'; ?>
                                   @endif
                             <td>{{$warna}}</td>
                             <td>
@@ -103,20 +106,25 @@
                               <a title="Verivikasi" class="btn btn-xs btn-success" href="{{ url('verifykajur/'.$sk->id_keluar) }}" id="btnverify"><i class="fa fa-check-square"></i></a>
                               @endif
                               @if ($sk->disposisi=='5')
-                              <a title="Print" class="btn btn-xs btn-default" href="{{ url('cetak/'.$sk->id_keluar) }}"><i class="fa fa-print"></i></a>
+
+                                @if ($sk->kategori == 'Surat Penelitian' )
+                                <?php $surat = "cetakpenelitian/".$sk->id_keluar; ?>
+                                @else($sk->kategori == 'Surat Observasi' )
+                                <?php $surat = "cetakobservasi/".$sk->id_keluar; ?>
+                                @endif
+                              <a title="Print" class="btn btn-xs btn-default" href="<?php echo $surat; ?>"><i class="fa fa-print"></i></a>
                               @endif
-                             
+
                                <a title="Detail" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar) }}"><i class="fa fa-search"></i></a>
                                 @if((Auth::user()->id_role == 1)||(Auth::user()->id_role == 3))
 
                                 @if ($sk->kategori == 'Surat Penelitian' )
-                                <?php $jenis_surat = "editpenelitian/".$sk->id_keluar."/".$sk->id_user; ?>
+                                <?php $jenis_surat = "editpenelitian/".$sk->id_keluar ?>
                                 @else($sk->kategori == 'Surat Observasi' )
                                 <?php $jenis_surat = "editobservasi/".$sk->id_keluar."/edit"; ?>
                                 @endif
 
-
-                              <a title="Edit" class="btn btn-xs btn-default" href=" <?php echo $jenis_surat; ?>"><i class="fa fa-edit"></i></a>
+                              <a title="Edit" class="btn btn-xs btn-default" href="<?php echo $jenis_surat; ?>"><i class="fa fa-edit"></i></a>
                               @endif
                               @if(Auth::user()->id_role == 1)
                               <a title="Delete" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus surat keluar {{ $sk->no_surat }}')){ $('#formdelete{{ $sk->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
@@ -178,6 +186,8 @@
                                   <?php $warna='KaLab'; ?>
                                   @elseif($sk->disposisi=='5')
                                   <?php $warna='Cetak'; ?>
+                                 @else
+                                   <?php $warna='draft';?>
 
                                   @endif
                             <td>{{$warna}}</td>
@@ -196,7 +206,7 @@
                               @endif
                                <a title="Detail" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar) }}"><i class="fa fa-search"></i></a>
                                @if((Auth::user()->id_role == 1)||(Auth::user()->id_role == 3))
-                              <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar.'/edit') }}"><i class="fa fa-edit"></i></a>
+                              <a title="Edit" class="btn btn-xs btn-default" href="{{ url('surat_keluar/'.$sk->id_keluar) }}"><i class="fa fa-edit"></i></a>
                               <a title="Delete" class="btn btn-xs btn-default" onclick="if(confirm('Apakah anda yakin akan menghapus surat keluar {{ $sk->no_surat }}')){ $('#formdelete{{ $sk->id_keluar }}').submit(); }"><i class="fa fa-close"></i></a>
                               @endif
                             </td>
@@ -257,36 +267,3 @@
       });
     </script>
 @endsection
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-        <h4 class="modal-title" id="myModalLabel"><b>Pilih Surat</b></h4>
-      </div>
-
-      <div class="modal-body">
-        <!-- select -->
-                <div class="form-group">
-
-                  <select class="form-control" onchange="location = this.options[this.selectedIndex].value;">
-                  <option value="">Pilih surat</option>
-                    <option value="rhs">Memo Cetak RHS</option>
-                    <option value="observasi">Surat Observasi</option>
-                    <option value="penelitian">Surat Penelitian</option>
-                  </select>
-                  <br>
-                  <br>
-                  <br>
-        <br>
-                </div>
-      </div>
-      <div class="modal-footer">
-
-
-      </div>
-    </div>
-  </div>
-</div>

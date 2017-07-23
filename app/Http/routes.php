@@ -88,6 +88,7 @@ Route::resource('penelitian','SuratkeluarController@penelitian');
 Route::resource('pkl','SuratkeluarController@pkl');
 
 Route::resource('observasi','SuratkeluarController@observasi');
+Route::resource('editobservasi','SuratkeluarController@editobservasi');
 
 Route::resource('rhs','SuratkeluarController@rhs');
 
@@ -97,10 +98,13 @@ Route::resource('edit_rhs','SuratkeluarController@edit_rhs');
 Route::resource('permohonan','SuratkeluarController@permohonan');
 
 Route::resource('cetakkrs','SuratkeluarController@cetakkrs');
+Route::post('update/{id}','SuratkeluarController@update');
+
 
 Route::resource('cetak','SuratkeluarController@cetak');
-Route::resource('editpenelitian/{id}/{q}','SuratkeluarController@editpenelitian');
-
+Route::resource('editpenelitian','SuratkeluarController@editpenelitian');
+Route::resource('cetakpenelitian','SuratkeluarController@cetakpenelitian');
+Route::resource('cetakobservasi','SuratkeluarController@cetakobservasi');
 Route::resource('tembusan','SuratmasukController@tembusan');
 
 Route::post('disposisi','SuratkeluarController@disposisi');

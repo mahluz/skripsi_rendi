@@ -55,9 +55,9 @@
 
                           <th>Surat Masuk</th>
                           <td>{{ $surat_masuk->no_surat }}</td>
-                         
+
                           <td rowspan="8"> <img style="width: 300px; height: auto;" src="{{url('upload/suratmasuk/'.$surat_masuk->image_masuk)}}" /></td>
-                          
+
                           </tr>
                           <tr>
                           <th>Hal </th>
@@ -83,7 +83,7 @@
                           <th> Tanggal</th>
                           <td>{{ date_format(date_create($surat_masuk->created_at),"d-m-Y") }}</td>
                           </tr>
-          
+
                         <tr>
                           <th style="width:30%">Action</th>
                           <td>
@@ -104,7 +104,7 @@
               </div><!-- /.row -->
             </section><!-- /.content -->
 @endsection
-                
+
 @section('script')
 @section('script')
 <!-- jQuery 2.1.4 -->

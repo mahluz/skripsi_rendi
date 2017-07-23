@@ -29,9 +29,9 @@ class SuratkeluarController extends Controller
         }
         public function index()
     {
-      if (Auth::user()->id_role!=1) {
-            return redirect('404');
-        }
+      // if (Auth::user()->id_role!=1) {
+      //       return redirect('404');
+      //   }
 
 
         $active = array(
@@ -47,6 +47,7 @@ class SuratkeluarController extends Controller
 
                 ->leftjoin('Kategori as d', 'a.id_kategori','=', 'd.id_kategori')
                 ->where('a.disposisi' , 1)
+                ->where('a.status', 1 )
                 ->select("*")
                 ->orderBy('id_keluar','desc')
                 ->get();
@@ -85,6 +86,7 @@ class SuratkeluarController extends Controller
                 ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
 
                 ->leftjoin('Kategori as d', 'a.id_kategori','=', 'd.id_kategori')
+                ->where('a.status', 1 )
                 ->select("*")
                 ->orderBy('id_keluar','desc')
                 ->get();
@@ -110,7 +112,7 @@ class SuratkeluarController extends Controller
             ->select("*")
             ->where('a.id_role',2)
             ->get();
-       
+
 
 
         return view('surat_keluar.create',['active' => $active, 'sub_judul' => 'Tambah surat Keluar']);
@@ -128,6 +130,15 @@ class SuratkeluarController extends Controller
 
 
 
+         if ($request->status==1){
+           $disposisi='0';
+         }elseif ($request->status==2){
+           $disposisi='10';
+         }
+
+
+
+
         $Surat_keluar = Surat_keluar::create([
             'no_surat'=>$no_surat,
             'id_user'=>Auth::user()->id_user,
@@ -138,7 +149,8 @@ class SuratkeluarController extends Controller
             'kepada'=> $request->kepada,
             'isi'=> $request->isi,
             'tembusan' => $request->tembusan,
-            'disposisi'=> $request->disposisi,
+            'disposisi'=> $disposisi,
+            'status'=> $request->status,
 
             ]);
         return redirect('suratsaya')->with('berhasil', $Surat_keluar?"berhasil":"gagal");
@@ -302,12 +314,66 @@ class SuratkeluarController extends Controller
             ->get();
             // dd(Auth::user());
         $data=User::join('prodi','users.prodi','=','prodi.prodi')->where('id_user',Auth::user()->id_user)->first();
-        // dd($data);
+        //print_r($data);
 
         return view('surat_keluar.penelitian',['active' => $active, 'sub_judul' => 'Tambah surat Keluar','data'=>$data]);
     }
 
-     public function editpenelitian($id,$q)
+     public function editpenelitian($id)
+    {
+      // dd($id);
+        $active = array(
+            'surat_keluar' => 'active',
+            );
+        $kategori_surat= Surat_keluar::where('id_keluar',$id)->first();
+
+        $surat_keluar = DB::table('surat_keluar as a')
+            ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
+            ->leftjoin('prodi as c','c.prodi', '=', 'b.prodi')
+            ->select("*")
+             ->where('a.id_keluar',$id)
+            ->get();
+
+
+        return view('surat_keluar.editpenelitian',[
+            'active' => $active,
+            'surat_keluar' => $surat_keluar,
+            'sub_judul' => 'Edit surat Keluar',
+            'kategori_surat' => $kategori_surat
+            ]);
+
+
+
+      }
+      public function editobservasi($id)
+    {
+      // dd($id);
+        $active = array(
+            'surat_keluar' => 'active',
+            );
+        $kategori_surat= Surat_keluar::where('id_keluar',$id)->first();
+
+        $surat_keluar = DB::table('surat_keluar as a')
+            ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
+            ->leftjoin('prodi as c','c.prodi', '=', 'b.prodi')
+            ->select("*")
+             ->where('a.id_keluar',$id)
+            ->get();
+
+
+
+          return view('surat_keluar.editobservasi',[
+              'active' => $active,
+              'surat_keluar' => $surat_keluar,
+              'sub_judul' => 'Edit surat Keluar',
+              'kategori_surat' => $kategori_surat
+              ]);
+
+
+
+      }
+
+      public function cetakpenelitian($id)
     {
       // dd($id,$q);
         $active = array(
@@ -317,19 +383,44 @@ class SuratkeluarController extends Controller
 
         $surat_keluar = DB::table('surat_keluar as a')
             ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
+            ->leftjoin('prodi as c','c.prodi', '=', 'b.prodi')
             ->select("*")
-             ->where('a.id_user',$q)
+             ->where('a.id_keluar',$id)
             ->get();
-          
-        return view('surat_keluar.editpenelitian',[
+
+
+        return view('surat_keluar.cetakpenelitian',[
             'active' => $active,
             'surat_keluar' => $surat_keluar,
             'sub_judul' => 'Edit surat Keluar',
             'kategori_surat' => $kategori_surat
             ]);
-
-
       }
+
+      public function cetakobservasi($id)
+    {
+      // dd($id,$q);
+        $active = array(
+            'surat_keluar' => 'active',
+            );
+        $kategori_surat= Surat_keluar::where('id_keluar',$id)->first();
+
+        $surat_keluar = DB::table('surat_keluar as a')
+            ->leftjoin('users as b', 'a.id_user', '=', 'b.id_user')
+            ->leftjoin('prodi as c','c.prodi', '=', 'b.prodi')
+            ->select("*")
+             ->where('a.id_keluar',$id)
+            ->get();
+
+
+        return view('surat_keluar.cetakobservasi',[
+            'active' => $active,
+            'surat_keluar' => $surat_keluar,
+            'sub_judul' => 'Edit surat Keluar',
+            'kategori_surat' => $kategori_surat
+            ]);
+      }
+
     public function cetak($id)
     {
 
@@ -350,7 +441,7 @@ class SuratkeluarController extends Controller
             'active' => $active,
             'surat_keluar' => $surat_keluar,
             'nama' => Auth::user()->name,
-            
+
             'surat' => $no_surat
 
 
@@ -373,7 +464,7 @@ class SuratkeluarController extends Controller
     }
 
      public function observasi()
-    {
+{
 
         $active = array(
             'surat_keluar' => 'active',
@@ -383,10 +474,12 @@ class SuratkeluarController extends Controller
             ->select("*")
             ->where('a.id_role',2)
             ->get();
+            // dd(Auth::user());
+        $data=User::join('prodi','users.prodi','=','prodi.prodi')->where('id_user',Auth::user()->id_user)->first();
+        //print_r($data);
 
-        return view('surat_keluar.observasi',['active' => $active, 'sub_judul' => 'Tambah surat Keluar', 'jenis_surat'=>'Surat Observasi']);
+        return view('surat_keluar.observasi',['active' => $active, 'sub_judul' => 'Tambah surat Keluar','data'=>$data]);
     }
-
     public function rhs()
     {
 

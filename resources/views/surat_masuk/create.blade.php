@@ -50,7 +50,7 @@
                           <input type="text" required name="no_surat" class="form-control" id="no_surat" placeholder="no_surat" value="{{ old('no_surat') }}">
                         <div class="form-group ">
                           <label for="name">Hal</label>
-                         
+
                           <input type="text" name="hal" class="form-control" id="hal" placeholder="hal" value="{{ old('hal') }}">
                         </div>
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
@@ -82,20 +82,20 @@
                         </div>
                         <div class="form-group">
                           <label for="judul">Tembusan</label>
-                          
+
                           <select required name="jabatan" class="form-control select2" data-placeholder="Pilih Tembusan" style="width: 100%;">
-                            
-                              
+
+
                               <option value="1" selected>Ketua Prodi</option>
                               <option value="2" selected>Ketua Jurusan</option>
                               <option value="3" selected>Sekretaris Jurusan</option>
                               <option value="4" selected>Kepala Laboratorium</option>
-                            
+
                           </select>
-                        </div>   
+                        </div>
                         <div class="form-group ">
                           <label for="image_masuk"> Gambar</label>
-                         
+
                           <input type="file"  name="image_masuk" class="form-control" id="image_masuk" placeholder="image masuk">
 
                         </div>
@@ -109,7 +109,7 @@
               </div><!-- /.row -->
             </section><!-- /.content -->
 @endsection
-                
+
 @section('script')
 <!-- jQuery 2.1.4 -->
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>

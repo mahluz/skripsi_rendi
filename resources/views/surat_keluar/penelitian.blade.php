@@ -62,9 +62,10 @@
                           </select>
                            <input type="hidden" required name="id_kategori" class="form-control" id="kategori" value="1">
                            <input type="hidden" required name="disposisi" class="form-control" id="disposisi" value="0">
-                        </div>                        
-                        
-                        
+                           
+                        </div>
+
+
                         <div class="form-group {{ $errors->has('kepada') ? ' has-error' : '' }}">
                           <label for="kepada">Kepada</label>
                           @if ($errors->has('kepada'))
@@ -90,7 +91,7 @@
                                   <strong>{{ $errors->first('nama') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Mahasiswa" value="{{ old('mahasiswa') }}">
+                          <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Mahasiswa" value="{{ $data->name }}">
                         </div>
                         <div class="form-group {{ $errors->has('no_id') ? ' has-error' : '' }}">
                           <label for="dari">NIM</label>
@@ -99,7 +100,7 @@
                                   <strong>{{ $errors->first('') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="no_id" class="form-control" id="no_id" placeholder="NIM" value="{{ old('no_id') }}">
+                          <input type="text" name="no_id" class="form-control" id="no_id" placeholder="NIM" value="{{ $data->no_id}}">
                         </div>
                         <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
                           <label for="dari">Program Studi</label>
@@ -108,7 +109,7 @@
                                   <strong>{{ $errors->first('prodi') }}</strong>
                               </span>
                           @endif
-                          <input type="text" name="prodi" class="form-control" id="hal" placeholder="Nama Prodi" value="S1">
+                          <input type="text" name="prodi" class="form-control" id="hal" placeholder="Nama Prodi" value="S1 {{$data->jenis_prodi}}">
                         </div>
                         <div class="form-group {{ $errors->has('prodi') ? ' has-error' : '' }}">
                           <label for="dari">Topik</label>
@@ -119,13 +120,19 @@
                           @endif
                           <input type="text" name="isi" class="form-control" id="prodi" placeholder="Topik Penelitian" value="{{ old('isi') }}">
                         </div>
-                        
-                        
+
+
                       </div><!-- /.box-body -->
-                      <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-save"></i></button>
+                      <div class="row">
+                      {{-- <div class="box-footer"> --}}
+                      <div class="col-xs-6">
+                        <button type="submit" name="status" value="1" class="btn btn-primary btn-block">Kirim <i class="fa fa-save"></i></button>
                       </div>
-                    </form>
+                      <div class="col-xs-6">
+                        <button type="submit" name="status" value="2" class="btn btn-primary btn-block">simpan<i class="fa fa-save"></i></button>
+                      </div>
+                        </form>
+                      </div>
                   </div><!-- /.box -->
                 </div><!-- /.col -->
                 <div class="col-xs-6">
@@ -138,11 +145,11 @@
                 <img style="width: 600px; height: auto;" src="{{url('gambar/gambar_surat_penelitian.PNG')}}"
                 </div>
                 </div>
-                
+
               </div> <!-- /.row -->
             </section><!-- /.content -->
 @endsection
-                
+
 @section('script')
 <!-- jQuery 2.1.4 -->
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
@@ -187,24 +194,3 @@
       })
     </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

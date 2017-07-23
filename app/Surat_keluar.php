@@ -17,6 +17,7 @@ class Surat_keluar extends Model
     'kepada',
     'isi',
     'tembusan',
-    'disposisi'
+    'disposisi',
+    'status'
     ];
 }
